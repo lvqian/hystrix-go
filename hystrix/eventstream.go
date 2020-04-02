@@ -120,15 +120,15 @@ func (sh *StreamHandler) publishMetrics(cb *CircuitBreaker) error {
 
 		// TODO: all hard-coded values should become configurable settings, per circuit
 
-		RollingStatsWindow:         10000,
+		RollingStatsWindow:         1000,
 		ExecutionIsolationStrategy: "THREAD",
 
 		CircuitBreakerEnabled:                true,
 		CircuitBreakerForceClosed:            false,
 		CircuitBreakerForceOpen:              cb.forceOpen,
-		CircuitBreakerErrorThresholdPercent:  uint32(getSettings(cb.Name).ErrorPercentThreshold),
-		CircuitBreakerSleepWindow:            uint32(getSettings(cb.Name).SleepWindow.Seconds() * 1000),
-		CircuitBreakerRequestVolumeThreshold: uint32(getSettings(cb.Name).RequestVolumeThreshold),
+		CircuitBreakerErrorThresholdPercent:  uint32(1),
+		CircuitBreakerSleepWindow:            uint32(5000),
+		CircuitBreakerRequestVolumeThreshold: uint32(1),
 	})
 	if err != nil {
 		return err
